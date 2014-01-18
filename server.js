@@ -53,14 +53,22 @@ db.once('open', function callback () {
     });
   });
 
-  app.delete('/gigs/:id', function(req, res) {
-    Gig.findById(req.params.id, function(err, gig) {
+  app.put('/gigs/:id', function(req, res) {
+    Gig.findOneAndUpdate({_id: req.params.id}, req.body, function(err, gig) {
       if (err) {
         res.send(500, 'something went wrong');
       } else {
-        gig.remove(function(err, gig) {
-          res.send(gig);
-        });
+        res.send(gig);
+      }
+    });
+  });
+
+  app.delete('/gigs/:id', function(req, res) {
+    Gig.findOneAndRemove({_id: req.params.id}, function(err, gig) {
+      if (err) {
+        res.send(500, 'something went wrong');
+      } else {
+        res.send(gig);
       }
     });
   });
