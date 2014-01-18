@@ -28,7 +28,7 @@ db.once('open', function callback () {
   });
   var Gig = mongoose.model('Gig', gigSchema);
 
-  app.post('/gigs', function(req, res) {
+  app.post('/gigs.:format?', function(req, res) {
     var gig = new Gig({
       title: req.body.title,
       description: req.body.description
@@ -36,47 +36,47 @@ db.once('open', function callback () {
     gig.save(function(err, gig) {
       if (err) {
         res.send(500, 'something went wrong');
-      } else {
+      } else if (!req.params.format || req.params.format === 'json') {
         res.send(201, gig);
       }
     });
   });
 
-  app.get('/gigs', function(req, res) {
+  app.get('/gigs.:format?', function(req, res) {
     Gig.find({}, function(err, gigs) {
       if (err) {
         res.send(500, 'something went wrong');
-      } else {
+      } else if (!req.params.format || req.params.format === 'json') {
         res.send(gigs);
       }
     });
   });
 
-  app.get('/gigs/:id', function(req, res) {
+  app.get('/gigs/:id.:format?', function(req, res) {
     Gig.findById(req.params.id, function(err, gig) {
       if (err) {
         res.send(500, 'something went wrong');
-      } else {
+      } else if (!req.params.format || req.params.format === 'json') {
         res.send(gig);
       }
     });
   });
 
-  app.put('/gigs/:id', function(req, res) {
+  app.put('/gigs/:id.:format?', function(req, res) {
     Gig.findOneAndUpdate({_id: req.params.id}, req.body, function(err, gig) {
       if (err) {
         res.send(500, 'something went wrong');
-      } else {
+      } else if (!req.params.format || req.params.format === 'json') {
         res.send(gig);
       }
     });
   });
 
-  app.delete('/gigs/:id', function(req, res) {
+  app.delete('/gigs/:id.:format?', function(req, res) {
     Gig.findOneAndRemove({_id: req.params.id}, function(err, gig) {
       if (err) {
         res.send(500, 'something went wrong');
-      } else {
+      } else if (!req.params.format || req.params.format === 'json') {
         res.send(gig);
       }
     });
