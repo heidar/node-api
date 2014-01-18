@@ -1,10 +1,29 @@
 {
   "name": "node-api",
+  "version": "0.0.0",
   "description": "A prototype node.js REST API",
-  "version": "0.0.1",
-  "private": true,
+  "main": "server.js",
   "dependencies": {
-    "express": "3.x",
-    "mongoose": "3.x"
-  }
+    "express": "~3.4.8",
+    "mongoose": "~3.8.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/heidar/node-api.git"
+  },
+  "keywords": [
+    "prototype",
+    "api"
+  ],
+  "author": "Heidar Bernardsson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/heidar/node-api/issues"
+  },
+  "homepage": "https://github.com/heidar/node-api"
 }
