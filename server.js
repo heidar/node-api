@@ -4,8 +4,17 @@ var express = require('express'),
   app = express(),
   mongoose = require('mongoose');
 
+app.configure('development', function() {
+  app.use(express.logger());
+  app.use(express.errorHandler({dumpExceptions: true, showStack: true}));
+});
+
+app.configure('production', function() {
+  app.use(express.logger());
+  app.use(express.errorHandler());
+});
+
 app.configure(function () {
-  app.use(express.logger('dev'));
   app.use(express.json());
 });
 
