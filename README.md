@@ -2,9 +2,10 @@
 
 ### TODO
 1. CRUD for Gig
-2. Validation
-3. Error handling
-4. Promises
-5. Logging
-6. User resource
-7. Authentication and authorization
+2. Format check
+3. Validation
+4. Error handling (return codes)
+5. Promises
+6. Logging
+7. User resource
+8. Authentication and authorization
