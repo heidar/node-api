@@ -6,7 +6,7 @@ var express = require('express'),
 
 app.configure(function () {
   app.use(express.logger('dev'));
-  app.use(express.bodyParser());
+  app.use(express.json());
 });
 
 mongoose.connect('mongodb://localhost/node-api');
@@ -26,21 +26,31 @@ db.once('open', function callback () {
     });
     gig.save(function(err, gig) {
       if (err) {
-        throw err;
+        res.send(500, 'something went wrong');
       } else {
         res.send(201, gig);
       }
     });
   });
-  
+
   app.get('/gigs', function(req, res) {
     Gig.find({}, function(err, docs) {
       if (err) {
-        throw err;
+        res.send(500, 'something went wrong');
       } else {
         res.send(docs);
       }
     });
+  });
+
+  app.get('/gigs/:id', function(req, res) {
+    Gig.findOne({_id: req.params.id}, function(err, docs) {
+      if (err) {
+        res.send(500, 'something went wrong');
+      } else {
+        res.send(docs);
+      }
+    })
   });
 
 });
